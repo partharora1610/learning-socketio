@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat App</title>
+  </head>
+  <body></body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io("http://localhost:5000");
+    socket.on("connect", (socket) => {
+      console.log("connected");
+    });
+
+    socket.on("messageFromServer", (message) => {
+      console.log(message.data + " came from the server");
+    });
+
+    socket.emit("messageFromClient", { data: "Hello from the client!" });
+  </script>
+</html>
