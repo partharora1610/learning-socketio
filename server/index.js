@@ -11,11 +11,8 @@ const expressServer = app.listen(5000);
 const io = socketio(expressServer);
 
 io.on("connection", (socket) => {
-  console.log("socket.io connected with the socket id: " + socket.id);
-
-  socket.emit("messageFromServer", { data: "Welcome to the socketio server" });
-
-  socket.on("messageFromClient", (dataFromClient) => {
-    console.log(dataFromClient.data);
+  socket.on("messageFromClient", (message) => {
+    console.log({ data: message.data });
+    io.emit("messageFromServer", { data: message.data });
   });
 });
